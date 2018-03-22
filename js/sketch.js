@@ -45,7 +45,7 @@ function drawGrid() {
             noFill(0);
             strokeWeight(2);
             stroke(0);
-            rect(i * 100, j * 100, 100, 100);
+            rect(i * 100, j * 100, 95, 95);
 
             let val = grid[i][j];
             if (grid[i][j] !== 0) {
