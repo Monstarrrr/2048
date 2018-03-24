@@ -1,13 +1,18 @@
 let grid;
 
+function blankGrid() {
+    return [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ]
+}
+
 // - SETUP - //
 function setup() {
     createCanvas(405, 405);
-    grid = [[0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
-    ];
+    grid = blankGrid();
 
     addNumber();
     addNumber();
@@ -50,12 +55,7 @@ function compare(a, b) {
 }
 
 function copyGrid(grid) {
-    let extra = [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ];
+    let extra = blankGrid();
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
             extra[i][j] = grid[i][j];
@@ -64,19 +64,33 @@ function copyGrid(grid) {
     return extra;
 }
 
-function flip(grid) {
-    for (i = 0; i < 4; i++) {
+function flipGrid(grid) {
+    for (let i = 0; i < 4; i++) {
         grid[i].reverse();
     }
 }
 
+function rotateGrid(grid) {
+    let newGrid = blankGrid();
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            newGrid[i][j] = grid[j][i];
+        }
+    }
+    return newGrid;
+}
+
 function keyPressed() {
+    let rotated = false;
     let flipped = false;
     if (keyCode === DOWN_ARROW) {
         // DO NOTHING
     } else if (keyCode === UP_ARROW) {
-        flip(grid);
+        flipGrid(grid);
         flipped = true;
+    } else if (keyCode === RIGHT_ARROW) {
+        grid = rotateGrid(grid);
+        rotated = true;
     }
 
     let past = copyGrid(grid);
@@ -86,7 +100,13 @@ function keyPressed() {
     let changed = compare(past, grid);
 
     if (flipped) {
-        flip(grid);
+        flipGrid(grid);
+    }
+
+    if (rotated) {
+        grid = rotateGrid(grid);
+        grid = rotateGrid(grid);
+        grid = rotateGrid(grid);
     }
 
     if (changed) {
