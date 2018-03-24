@@ -2,16 +2,15 @@ let grid;
 
 // - SETUP - //
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(405, 405);
     grid = [[0, 0, 0, 0],
             [0, 0, 0, 0],
             [0, 0, 0, 0],
             [0, 0, 0, 0]
     ];
-    console.table(grid);
+
     addNumber();
     addNumber();
-    console.table(grid);
 }
 
 function addNumber() {
@@ -33,10 +32,81 @@ function addNumber() {
 }
 
 // - DRAW - //
+
+function compare(a, b) {
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (a[i][j] != b[i][j]) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function copyGrid(grid) {
+    let extra = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ];
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            extra[i][j] = grid[i][j];
+        }
+    }
+    return extra;
+}
+
+function operate(row) {
+    row = slide(row);
+    row = combine(row);
+    row = slide(row);
+    return row;
+}
+
+function keyPressed() {
+    if (keyCode == '40') {
+
+        let past = copyGrid(grid);
+        for (let i = 0; i < 4; i++) {
+            grid[i] = operate(grid[i]);
+        }
+        let changed = compare(past, grid);
+        if (changed) {
+            addNumber();
+        }
+    }
+}
+
+// --- DRAW --- //
 function draw() {
     background(220);
     drawGrid();
 }
+
+
+function slide(row) {
+    let arr = row.filter(val => val);
+    let missing = 4 - arr.length;
+    let zeros = Array(missing).fill(0);
+    arr = zeros.concat(arr);
+    return arr;
+}
+
+function combine(row) {
+    for (i = 3; i >= 1; i--) {
+        let a = row[i];
+        let b = row[i - 1];
+        if (a == b) {
+            row[i] = a + b;
+            row[i - 1] = 0;
+        }
+    }
+    return row;
+}
+
 
 function drawGrid() {
     for (let i = 0; i < 4; i++) {
@@ -45,15 +115,15 @@ function drawGrid() {
             noFill(0);
             strokeWeight(2);
             stroke(0);
-            rect(i * 100, j * 100, 95, 95);
+            rect(i * 100 + 5, j * 100 + 5, 95, 95);
 
             let val = grid[i][j];
             if (grid[i][j] !== 0) {
-                textAlign(CENTER);
+                textAlign(CENTER, CENTER);
                 textSize(64);
                 fill(0);
                 noStroke();
-                text(val, i * 100 - 100 / 2, j * 100 - 100 / 2);
+                text(val, (i * 100 + 100 / 2) + 4, (j * 100 + 100 / 2) + 4);
             }
         }
     }
