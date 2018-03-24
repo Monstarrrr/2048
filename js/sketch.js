@@ -31,7 +31,12 @@ function addNumber() {
     }
 }
 
-// - DRAW - //
+function operate(row) {
+    row = slide(row);
+    row = combine(row);
+    row = slide(row);
+    return row;
+}
 
 function compare(a, b) {
     for (let i = 0; i < 4; i++) {
@@ -59,33 +64,42 @@ function copyGrid(grid) {
     return extra;
 }
 
-function operate(row) {
-    row = slide(row);
-    row = combine(row);
-    row = slide(row);
-    return row;
+function flip(grid) {
+    for (i = 0; i < 4; i++) {
+        grid[i].reverse();
+    }
 }
 
 function keyPressed() {
-    if (keyCode == '40') {
+    let flipped = false;
+    if (keyCode === DOWN_ARROW) {
+        // DO NOTHING
+    } else if (keyCode === UP_ARROW) {
+        flip(grid);
+        flipped = true;
+    }
 
-        let past = copyGrid(grid);
-        for (let i = 0; i < 4; i++) {
-            grid[i] = operate(grid[i]);
-        }
-        let changed = compare(past, grid);
-        if (changed) {
-            addNumber();
-        }
+    let past = copyGrid(grid);
+    for (let i = 0; i < 4; i++) {
+        grid[i] = operate(grid[i]);
+    }
+    let changed = compare(past, grid);
+
+    if (flipped) {
+        flip(grid);
+    }
+
+    if (changed) {
+        addNumber();
     }
 }
 
 // --- DRAW --- //
+
 function draw() {
     background(220);
     drawGrid();
 }
-
 
 function slide(row) {
     let arr = row.filter(val => val);
@@ -108,6 +122,7 @@ function combine(row) {
 }
 
 
+// The Grid //
 function drawGrid() {
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
