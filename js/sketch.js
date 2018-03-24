@@ -68,6 +68,7 @@ function flipGrid(grid) {
     for (let i = 0; i < 4; i++) {
         grid[i].reverse();
     }
+    return grid;
 }
 
 function rotateGrid(grid) {
@@ -83,14 +84,22 @@ function rotateGrid(grid) {
 function keyPressed() {
     let rotated = false;
     let flipped = false;
+    let played = true;
     if (keyCode === DOWN_ARROW) {
         // DO NOTHING
     } else if (keyCode === UP_ARROW) {
-        flipGrid(grid);
+        grid = flipGrid(grid);
         flipped = true;
     } else if (keyCode === RIGHT_ARROW) {
         grid = rotateGrid(grid);
         rotated = true;
+    } else if (keyCode === LEFT_ARROW) {
+        grid = rotateGrid(grid);
+        grid = flipGrid(grid);
+        rotated = true;
+        flipped = true;
+    } else {
+        played = false;
     }
 
     let past = copyGrid(grid);
@@ -100,7 +109,7 @@ function keyPressed() {
     let changed = compare(past, grid);
 
     if (flipped) {
-        flipGrid(grid);
+        grid = flipGrid(grid);
     }
 
     if (rotated) {
