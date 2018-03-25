@@ -63,57 +63,20 @@ function keyPressed() {
 
     let gameover = isGameOver();
     if (gameover) {
-        alert("GAME OVER");
-        alert("SCORE : " + score);
+        console.log("GAME OVER");
+        console.log("SCORE : " + score);
     }
 
     let gamewon = isGameWon();
     if (gamewon) {
-        alert("GAME WON !");
-        alert("SCORE : " + score);
+        console.log("GAME WON !");
+        console.log("SCORE : " + score);
     }
 }
 
 // --- DRAW --- //
-
 function updateCanvas() {
     background(187, 173, 160);
     drawGrid();
     document.getElementById('score').innerHTML = score;
-}
-
-
-// The Grid //
-function drawGrid() {
-    for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 4; j++) {
-
-            noFill(0);
-            strokeWeight(2);
-            let val = grid[i][j];
-            let s = val.toString();
-            stroke(0);
-            if (grid_new[i][j] === 1) {
-                stroke('rgba(87,114,59,0.25)');
-                grid_new[i][j] = 0;
-                strokeWeight(2);
-            } else {
-                strokeWeight(3);
-                stroke(0);
-            }
-            if (val != 0) {
-                fill(colorsSizes[s].color);
-            } else {
-                noFill();
-            }
-            rect(i * 100 + 5, j * 100 + 5, 95, 95, 20, 20);
-            if (val !== 0) {
-                textAlign(CENTER, CENTER);
-                noStroke();
-                fill(0);
-                textSize(colorsSizes[s].size);
-                text(val, (i * 100 + 100 / 2) + 2, (j * 100 + 100 / 2) + 4);
-            }
-        }
-    }
 }

@@ -7,6 +7,40 @@ function blankGrid() {
     ]
 }
 
+function drawGrid() {
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+
+            noFill(0);
+            strokeWeight(2);
+            let val = grid[i][j];
+            let s = val.toString();
+            stroke(0);
+            if (grid_new[i][j] === 1) {
+                stroke('rgb(237,207,114)');
+                grid_new[i][j] = 0;
+                strokeWeight(2);
+            } else {
+                strokeWeight(3);
+                stroke(0);
+            }
+            if (val != 0) {
+                fill(colorsSizes[s].color);
+            } else {
+                noFill();
+            }
+            rect(i * 100 + 5, j * 100 + 5, 95, 95, 20, 20);
+            if (val !== 0) {
+                textAlign(CENTER, CENTER);
+                noStroke();
+                fill(0);
+                textSize(colorsSizes[s].size);
+                text(val, (i * 100 + 100 / 2) + 2, (j * 100 + 100 / 2) + 4);
+            }
+        }
+    }
+}
+
 function compare(a, b) {
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
