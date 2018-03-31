@@ -1,3 +1,1 @@
-Reproducing the game 2048 in javascript & p5.js
-
--Modification test-
+2048 Game - Monstar Version with p5.js.

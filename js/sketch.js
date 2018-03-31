@@ -15,6 +15,24 @@ function setup() {
     updateCanvas();
 }
 
+function buttonClicked(x){
+    switch (x) {
+        case 0:
+            keyCode = DOWN_ARROW;
+            break;
+        case 1:
+            keyCode = UP_ARROW;
+            break;
+        case 2:
+            keyCode = LEFT_ARROW;
+            break;
+        case 3:
+            keyCode = RIGHT_ARROW;
+            break;
+    }
+    keyPressed();
+}
+
 function keyPressed() {
     let rotated = false;
     let flipped = false;
