@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
     <script src="js/sketch.js"></script>
     <script src="js/grid.js"></script>
     <script src="js/game.js"></script>
@@ -26,10 +26,10 @@
             Use buttons on mobile <br/>
             Use keyboard arrows on PC
         </p>
-        <button class="leftButton" onclick="buttonClicked(2)"><-</button>
-        <button class="upButton" onclick="buttonClicked(1)">/\</button>
-        <button class="downButton" onclick="buttonClicked(0)">\/</button>
-        <button class="rightButton" onclick="buttonClicked(3)">-></button>
+        <button class="btn leftButton" onclick="buttonClicked(2)"><-</button>
+        <button class="btn upButton" onclick="buttonClicked(1)">/\</button>
+        <button class="btn downButton" onclick="buttonClicked(0)">\/</button>
+        <button class="btn rightButton" onclick="buttonClicked(3)">-></button>
         <br/><br/>
         <span>Score :</span>
         <span id="score">0</span>

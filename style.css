@@ -10,14 +10,6 @@ div {
     text-align:center;
 }
 
-hr.line1 { 
-height: 30px; 
-border-style: solid; 
-border-color: #8c8b8b; 
-border-width: 1px 0 0 0; 
-border-radius: 20px; 
-} 
-
 span {
     font-size: 32pt;
 }
@@ -27,4 +19,16 @@ canvas {
     width: 50%;
     border: 10px solid white;
     padding: 4px;
+}
+
+hr.line1 { 
+    height: 30px; 
+    border-style: solid; 
+    border-color: #8c8b8b; 
+    border-width: 1px 0 0 0; 
+    border-radius: 20px; 
+}
+
+.btn {
+    margin: 15px;
 }
